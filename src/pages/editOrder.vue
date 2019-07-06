@@ -69,7 +69,7 @@
             'language':this.order_language,
             'budget':this.order_budget,
             'duedate':this.due_date,
-            'sender':this.order_sender
+            'sender':this.order_sender.split('-')[0]
           };
 
           this.$axios
@@ -118,7 +118,7 @@
           .then(
             res => {
               for (let i = 0; i < res.data.senders.length; i++) {
-                this.senders.push(res.data.senders[i].sender);
+                this.senders.push(res.data.senders[i].id+"-"+res.data.senders[i].sender);
               }
             }
           ).catch(

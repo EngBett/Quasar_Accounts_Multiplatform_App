@@ -91,6 +91,11 @@ export default {
           to:'/senders',
           label:'Senders'
         },
+        {
+          icon:'receipt',
+          to:'/invoice',
+          label:'Invoice'
+        }
 
       ]
     }

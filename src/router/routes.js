@@ -10,7 +10,8 @@ const routes = [
       { path: '/senders', component: () => import('pages/Senders.vue') },
       { path: '/add-sender', component: () => import('pages/addSender.vue') },
       { path: '/income', component: () => import('pages/Income.vue') },
-      { path: '/edit-sender', component: () => import('pages/editSender.vue') }
+      { path: '/edit-sender', component: () => import('pages/editSender.vue') },
+      { path: '/invoice', component: () => import('pages/Invoice.vue') }
     ]
   }
 ]

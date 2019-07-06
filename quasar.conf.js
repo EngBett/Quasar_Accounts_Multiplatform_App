@@ -62,7 +62,12 @@ module.exports = function (ctx) {
         'QInput',
         'QSelect',
         'QDate',
-        'QTime'
+        'QTime',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
+        'QToggle',
+        'QRadio'
 
       ],
 

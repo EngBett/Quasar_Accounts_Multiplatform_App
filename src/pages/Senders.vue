@@ -28,12 +28,12 @@
 
                     <q-item-section class="enlarge text-primary">
 
-                        <q-btn class="gt-xs" :to="editSender+sender.id" size="12px" flat dense round icon="edit"/>
+                        <q-btn :to="editSender+sender.id" size="12px" flat dense round icon="edit"/>
 
                     </q-item-section>
                     <q-item-section class="enlarge text-negative">
 
-                        <q-btn class="gt-xs" @click.native="deleteSender(sender.id)" size="12px" flat dense round
+                        <q-btn @click.native="deleteSender(sender.id)" size="12px" flat dense round
                                icon="delete_forever"/>
 
                     </q-item-section>
