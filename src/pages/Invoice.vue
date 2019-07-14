@@ -77,15 +77,7 @@ export default {
         //this.getInvoice(2);
     },
     methods: {
-        al(i,r){
-            if(i !==''){
-                for (let j = 0; j < this.selected.length; j++) {
-                    if(r!==j){
-                        this.selected[j]='';
-                    }
-                }
-            }
-        },
+
         getSenders(){
             this.$axios
                 .get('http://localhost:8000/get-senders')
@@ -120,6 +112,7 @@ export default {
                     .get('http://localhost:8000/invoice/'+id)
                     .then(
                         res => {
+                            this.prices=[];
                             this.invoices = res.data.invoice;
                             for (let i = 0; i < this.invoices.length; i++) {
                                 this.prices.push(parseInt(this.invoices[i].budget));
@@ -130,6 +123,7 @@ export default {
                 );
             }else{
                 this.invoices = [];
+                this.prices=[];
             }
 
         },

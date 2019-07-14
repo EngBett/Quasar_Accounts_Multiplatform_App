@@ -1,12 +1,14 @@
 <template>
   <q-layout view="hHh Lpr fFf">
-    <q-header elevated class="bg-accent text-white">
-      <q-toolbar>
-        <q-toolbar-title>
+    <q-header elevated>
+      <q-bar dark class="bg-accent text-white q-electron-drag">
+        <q-btn dense flat round icon="lens" size="8.5px" color="red" @click.native="closeApp" />
+        <q-btn dense flat round icon="lens" size="8.5px" color="yellow" @click.native="minimize" />
+        <q-btn dense flat round icon="lens" size="8.5px" color="green" @click.native="maximize" />
+        <div class="col text-center text-weight-bold">
           My Accounts
-        </q-toolbar-title>
-
-      </q-toolbar>
+        </div>
+      </q-bar>
     </q-header>
 
     <q-footer bordered class="bg-white text-accent">
@@ -103,6 +105,30 @@ export default {
   mounted(){
   },
   methods: {
+    minimize () {
+      if (process.env.MODE === 'electron') {
+        this.$q.electron.remote.BrowserWindow.getFocusedWindow().minimize()
+      }
+    },
+
+    maximize () {
+      if (process.env.MODE === 'electron') {
+        const win = this.$q.electron.remote.BrowserWindow.getFocusedWindow()
+
+        if (win.isMaximized()) {
+          win.unmaximize()
+        }
+        else {
+          win.maximize()
+        }
+      }
+    },
+
+    closeApp () {
+      if (process.env.MODE === 'electron') {
+        this.$q.electron.remote.BrowserWindow.getFocusedWindow().close()
+      }
+    },
     openURL
 
   }
