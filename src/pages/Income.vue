@@ -1,5 +1,5 @@
 <template>
-    <q-page class="q-ml-lg q-mt-lg q-mr-lg">
+    <q-page class="q-ml-lg q-mt-lg q-mr-lg force-overflow">
 
         <div class="flex-center q-pa-md row items-start q-gutter-md">
             <q-card

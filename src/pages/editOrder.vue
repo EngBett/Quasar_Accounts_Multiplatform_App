@@ -1,33 +1,40 @@
 <template>
-  <q-page class="q-ml-md q-mr-md">
-    <div class="text-h6 text-accent q-ml-md q-mt-md" style="width: 100%;">
-      Edit Order
+  <q-page padding>
+
+    <div class="scrollbar" id="style-7" :style="{ height: (window.height/738)*670 + 'px' }">
+      <div class="force-overflow">
+        <div class="text-h6 text-accent q-mt-md" style="width: 100%;">
+          Edit Order
+        </div>
+
+        <div class="q-mt-md" style="max-width: 100%;">
+
+          <q-input v-model="order_title" label="Enter the Order Title" style="max-width: 400px;" />
+
+          <q-input v-model="order_language" label="Language (e.g. python)" style="max-width: 400px;"/>
+
+          <q-input v-model="order_budget" label="Budget (Ksh)" type="number" style="max-width: 400px;"/>
+
+          <q-select v-model="order_sender" :options="senders" label="Select Sender" style="max-width: 400px;"/>
+
+          <div class="q-mt-md text-accent" style="font-size: 18px">
+            Select Due date
+          </div>
+
+          <div class="row items-start">
+            <q-date v-model="due_date" mask="YYYY-MM-DD HH:mm" class="q-mr-md" color="purple" />
+            <q-time v-model="due_time" mask="YYYY-MM-DD HH:mm" color="purple" />
+          </div>
+
+          <div class="q-mt-md q-mb-lg">
+            <q-btn color="purple" @click.native="submitForm" label="Submit" />
+          </div>
+
+        </div>
+      </div>
     </div>
 
-    <div class="q-ml-md q-mt-md" style="max-width: 100%;">
 
-      <q-input v-model="order_title" label="Enter the Order Title" style="max-width: 400px;" />
-
-      <q-input v-model="order_language" label="Language (e.g. python)" style="max-width: 400px;"/>
-
-      <q-input v-model="order_budget" label="Budget (Ksh)" type="number" style="max-width: 400px;"/>
-
-      <q-select v-model="order_sender" :options="senders" label="Select Sender" style="max-width: 400px;"/>
-
-      <div class="q-mt-md text-accent" style="font-size: 18px">
-        Select Due date
-      </div>
-
-      <div class="row items-start">
-        <q-date v-model="due_date" mask="YYYY-MM-DD HH:mm" class="q-mr-md" color="purple" />
-        <q-time v-model="due_time" mask="YYYY-MM-DD HH:mm" color="purple" />
-      </div>
-
-      <div class="q-mt-md q-mb-lg">
-        <q-btn color="purple" @click.native="submitForm" label="Submit" />
-      </div>
-
-    </div>
   </q-page>
 </template>
 
@@ -39,6 +46,10 @@
   export default {
     data () {
       return {
+        window: {
+          width: 0,
+          height: 0
+        },
         order_title:null,
         order_language:null,
         order_budget:null,
@@ -52,8 +63,17 @@
     mounted(){
       this.getSenders();
       this.getOrder();
+      window.addEventListener('resize', this.handleResize);
+      this.handleResize();
+    },
+    destroyed() {
+      window.removeEventListener('resize', this.handleResize)
     },
     methods:{
+      handleResize() {
+        this.window.width = window.innerWidth;
+        this.window.height = window.innerHeight;
+      },
       submitForm(){
         if(
           this.order_title!==null&&
